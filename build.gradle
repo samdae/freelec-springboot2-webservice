@@ -36,6 +36,9 @@ dependencies {
     // h2 database
     implementation('com.h2database:h2')
 
+    // update test 1
+    // update test 2
+
     // 소셜 로그인 등 클라이언트 입장에서 소셜기능 구현시 필요한 의존성
     // spring-security-oauth2-client 와 spring-security-oauth2-jose 를 기본으로 관리해줌
     implementation('org.springframework.boot:spring-boot-starter-oauth2-client') // oauth2 client
