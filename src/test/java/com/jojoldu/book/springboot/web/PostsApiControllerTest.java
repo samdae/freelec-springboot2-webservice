@@ -64,10 +64,10 @@ public class PostsApiControllerTest {
     }
 
     @Test
-    /**
-     * 인증된 모의(가짜) 사용자를 만들어서 사용함
-     * roles에 권한을 추가할 수 있음
-     * 즉, 이 어노테이션으로 인해 ROLE_USER 권한을 가진 사용자가 API를 요청하는 것과 동일하게 됨
+    /*
+      인증된 모의(가짜) 사용자를 만들어서 사용함
+      roles에 권한을 추가할 수 있음
+      즉, 이 어노테이션으로 인해 ROLE_USER 권한을 가진 사용자가 API를 요청하는 것과 동일하게 됨
      */
     @WithMockUser(roles="USER")
     public void Posts_등록된다() throws Exception {
@@ -83,12 +83,12 @@ public class PostsApiControllerTest {
         String url = "http://localhost:" + port + "/api/v1/posts";
 
         // when : security + oauth2
-        /**
+        /*
          * 생성된 MockMvc 를 통해 API를 테스트 한다.
          * 본문(Body) 영역은 문자열로 표현하기 위해 ObjectMapper를 통해 문자열 JSON으로 변환.
          */
         mvc.perform(post(url)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(requestDto)))
         .andExpect(status().isOk());
 
@@ -131,12 +131,12 @@ public class PostsApiControllerTest {
                 .build();
 
         String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
-        HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+        //HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
 
         // when : security + oauth2
         mvc.perform(put(url)
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(requestDto)))
                 .andExpect(status().isOk());
         // then
