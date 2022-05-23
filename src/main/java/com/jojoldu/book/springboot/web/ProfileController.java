@@ -20,7 +20,7 @@ public class ProfileController {
         List<String> realProfiles = Arrays.asList("real", "real1", "real2");
 
         String defaultProfile = profiles.isEmpty() ? "default" : profiles.get(0);
-
+        // 수동배포 할게연
         return profiles.stream()
                 .filter(realProfiles::contains)
                 .findAny()
