@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "> deploy.sh 시작"
 
 REPOSITORY=/home/ec2-user/app/step2
 PROJECT_NAME=freelec-springboot2-webservice
