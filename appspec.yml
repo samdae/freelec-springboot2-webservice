@@ -2,7 +2,7 @@ version: 0.0 # CodeDeploy 버전을 이야기 함, 0.0 이 외의 버전이면 �
 os: linux
 files:
   - source: / #CodeDeploy에 전달해 준 파일 중 destination으로 이동시킬 대상을 정함.
-    destination: /home/ec2-user/app/step2/zip/ # source에서 지정된 파일을 받을 위치. 빌드된 jar를 여기로 옮길 것.
+    destination: /home/ec2-user/app/step3/zip/ # source에서 지정된 파일을 받을 위치. 빌드된 jar를 여기로 옮길 것.
     overwrite: yes # 기존 파일들이 있으면 덮어쓸지를 결정
 
 permissions:
@@ -12,7 +12,15 @@ permissions:
     group: ec2-user
 
 hooks:
+  AfterInstall:
+    - location: stop.sh # nginx와 연결되어 있지 않은 스프링부트를 종료함
+      timeout: 60
+      runas: ec2-user
   ApplicationStart:
-    - location: deploy.sh
+    - location: start.sh # nginx와 연결되어 있지 않은 Port로 새 버전의 스프링부트를 실행
+      timeout: 60
+      runas: ec2-user
+  ValidateService:
+    - location: health.sh # 새 스프링부트가 정상적으로 실행됐는지 확인.
       timeout: 60
       runas: ec2-user
